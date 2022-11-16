@@ -2,24 +2,24 @@
 #include <fstream>
 #include <math.h>
 #include <vector>
+#include <bits/stdc++.h>
+
 using namespace std;
 
-void bubbleSort(vector<int>& a)
+void insertionSort(vector<int> &vec)
 {
-      bool swapp = true;
-      while(swapp){
-        swapp = false;
-        for (size_t i = 0; i < a.size()-1; i++) {
-            if (a[i]>a[i+1] ){
-                a[i] += a[i+1];
-                a[i+1] = a[i] - a[i+1];
-                a[i] -=a[i+1];
-                swapp = true;
-            }
-        }
+    for (auto it = vec.begin(); it != vec.end(); it++)
+    {        
+        // Searching the upper bound, i.e., first 
+        // element greater than *it from beginning
+        auto const insertion_point = 
+            upper_bound(vec.begin(), it, *it);
+          
+        // Shifting the unsorted part
+        rotate(insertion_point, it, it+1);        
     }
 }
-
+  
 vector<int> slicing(vector<int> arr, int min, int max){
     auto start = arr.begin()+min;
     auto end = arr.begin()+max+1;
@@ -60,9 +60,9 @@ int main()
 
 {   
     ofstream file;
-    file.open("/home/luisfelipe/Proyectos/ev4/tiemposejecucionbubble/tiemposc++.txt");
+    file.open("/home/luisfelipe/Proyectos/ev4/tiemposejecucioninsert/tiemposc++insert.txt");
     ofstream file2;
-    file2.open("/home/luisfelipe/Proyectos/ev4/desviacionestandarbubble/desviacionestarc++.txt");
+    file2.open("/home/luisfelipe/Proyectos/ev4/desviacionestandarinsert/desviacionestarc++insert.txt");
     int e[]={100,1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000,
     9000, 10000, 20000, 30000, 40000, 50000};
     
@@ -78,7 +78,7 @@ int main()
             
     
             t0=clock();
-            bubbleSort(listas[i]);
+            insertionSort(listas[i]);
             t1=clock();
     
             double time = (double(t1-t0)/CLOCKS_PER_SEC);
@@ -105,4 +105,5 @@ int main()
    file.close();
    file2.close();
     return 0;
+    
 }

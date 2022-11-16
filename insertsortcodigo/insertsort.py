@@ -18,15 +18,39 @@ def insertionSort(arr):
                 j -= 1
         arr[j + 1] = key
 
-f = open("tiempospythoninsertsort.txt", 'w')
-f1 = open("desviacionstandarpythoninsertsort.txt", 'w')
+def crearlistas(x):
+    listaprincipal = []
+    listadatos = []
+
+    with open(x) as archivo:
+        for linea in archivo:
+            listaprincipal.append(int(linea))
+        
+    for i in e:
+        temp = listaprincipal[0:i]
+        listadatos.append(temp)
+
+    return listadatos
+
+
+f = open("tiemposejecucioninsert/tiempospythoninsertsort.txt", 'w')
+f1 = open("desviacionestandarinsert/desviacionstandarpythoninsertsort.txt", 'w')
 e = [100,1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000,
 9000, 10000, 20000, 30000, 40000, 50000]
 
-for i in range(0,12):
+archivo = "datos"
+
+for i in range(0,4):
     t=[]
+    
+    listprin = []
+    for x in range(0,15):
+        archivoindex = archivo + str(x+1) + ".txt"
+        listas = crearlistas(archivoindex)
+        listprin.append(listas)
+    
     for j in range(0,5):
-        a = np.random.randint(1,100, size = e[i])
+        a = listprin[j][i]
 
         inicio = default_timer()
         insertionSort(a)
